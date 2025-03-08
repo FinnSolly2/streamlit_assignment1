@@ -10,6 +10,9 @@ import random
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
 
+url = "https://docs.google.com/spreadsheets/d/1A_xcXCZcWGg0ixa83XVUFgunb_m1ATry1a37ZDID4vI/edit?gid=0#gid=0"
+
+
 # Setting up the connection to Gsheet
 conn = st.connection(
     "gsheets", 
@@ -41,10 +44,10 @@ if 'graph_type' not in st.session_state:
 # ⭐ Initialize data or load it from session state
 # This is crucial - we load data only once at startup, then manage it in memory
 if 'graph_data' not in st.session_state:
-    st.session_state.graph_data = conn.read(worksheet="Data")
+    st.session_state.graph_data = conn.read(spreadsheet=url, worksheet="Data")
     
 if 'response_data' not in st.session_state:
-    st.session_state.response_data = conn.read(worksheet="Reactions")
+    st.session_state.response_data = conn.read(spreadsheet=url, worksheet="Reactions")
     st.session_state.app_initialized = True
 
 # Use data from session state
